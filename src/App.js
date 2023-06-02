@@ -1,23 +1,19 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Navbar from './components/Navbar'
+import Homepage from './pages/Homepage';
+import ShowDetails from './pages/ShowDetails';
+import { Route, Routes } from 'react-router-dom';
 
 function App() {
+  const [bodyPart, setbodyPart] = useState('all')
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar setbodyPart={setbodyPart}/>
+      <Routes>
+        <Route path='/' element={<Homepage bodyPart={bodyPart} setbodyPart={setbodyPart}/>}/>
+        <Route path='/shows/:id' element={<ShowDetails/>}/> 
+      </Routes>
     </div>
   );
 }
